@@ -12,7 +12,7 @@
 
 import abc
 
-DEFAULT_METAMAP_VERSION = '2012'
+DEFAULT_METAMAP_VERSION = '2016'
 
 class MetaMap:
     """ Abstract base class for extracting concepts from text using

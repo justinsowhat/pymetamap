@@ -5,6 +5,8 @@ Python wrapper around `MetaMap <http://metamap.nlm.nih.gov/>`_.
 This will take a list of sentences and extract concepts using MetaMap
 then return them in the form of a list of Concept objects.
 
+This is originally written by Anthony Rios <https://github.com/AnthonyMRios/pymetamap>
+
 How to Install
 --------------
 
@@ -12,6 +14,11 @@ How to Install
 
 Example Usage
 -------------
+To use the package, you must have installed a MetaMap instance on your local environment.
+For instructions, please go to <https://metamap.nlm.nih.gov/>. When using this wrapper,
+please start the SKR/Medpost Part-of-Speech Tagger Server:
+::
+    >>> <public_mm_dir>/bin/skrmedpostctl start
 
 To start you must create a MetaMap instance from the pymetamap package.
 ::
@@ -35,9 +42,14 @@ a list of Concept objects.
 This example shows two seperate concepts extracted via MetaMap from two
 different sentences (sentence 1 and sentence 2).
 
+TODO
+----
+Implement a function to return the source term that metamap extract a concept from.
+
 More Information
 ----------------
 
 Licensed under `Apache 2.0 <http://www.apache.org/licenses/LICENSE-2.0>`_.
 
 Written by Anthony Rios
+Modified by Justin So
