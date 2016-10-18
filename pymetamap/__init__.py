@@ -18,6 +18,6 @@ from Concept import Corpus
 
 __all__ = (MetaMap, Concept, Corpus)
 
-__authors__ = 'Anthony Rios'
-__version__ = '0.1'
-__email__ = 'anthonymrios@gmail.com'
+__authors__ = 'Anthony Rios, Justin So'
+__version__ = '0.2'
+__email__ = 'anthonymrios@gmail.com, q.justin.so@gmail.com'
