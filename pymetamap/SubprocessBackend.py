@@ -79,8 +79,10 @@ class SubprocessBackend(MetaMap):
                     for identifier, sentence in zip(ids, sentences):
                         input_file.write('%r|%r\n' % (identifier, sentence))
                 else:
-                    for sentence in sentences:
-                        input_file.write('%r\n' % sentence)
+                    ids = []
+                    for identifier, sentence in enumerate(sentences):
+                        ids.append(identifier)
+                        input_file.write('%r|%r\n' % (identifier, sentence))
                 input_file.flush()
 
             command = [self.metamap_filename, '-N']
@@ -122,8 +124,7 @@ class SubprocessBackend(MetaMap):
                     error = stdout.rstrip()
                 
             output = output_file.read()
-
-        finally:       
+        finally:
             if sentences is not None:
                 os.remove(input_file.name)
             else:

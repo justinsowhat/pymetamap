@@ -53,7 +53,7 @@ My Minor Modifications
 ----------------------
 As I was using this great python library, I realized that I needed a way to get the
 trigger terms as well as the indices of a trigger. So now you can get them by call these
-two methods in a Concept class ``get_pos_info()`` and ``get_trigger()``s:
+two methods in a Concept class ``get_pos_info()`` and ``get_trigger()``:
 ::
     >>> for concept in concepts:
     ...     print concept.get_trigger()
@@ -62,6 +62,19 @@ two methods in a Concept class ``get_pos_info()`` and ``get_trigger()``s:
     set([(0, 12])
     heart attack
     set([16:28])
+
+
+Another modification is to automatically assign an id to each sentence. In the original implementation,
+sentences only get an id if you specify it by passing a list of ids, as shown above. Now you can simply pass a list of
+sentences as an argument. In this case, the id starts at 0.
+::
+    >>> concepts,error = mm.extract_concepts(sents)
+    >>> for concept in concepts:
+    ...     print(concept)
+    ConceptMMI(index='0', mm='MMI', score='14.64', preferred_name='Myocardial Infarction', cui='C0027051', semtypes='[dsyn]', trigger='["-- Heart Attack"-tx-1-"Heart Attack"-noun-0]', location='TX', pos_info='1/12', tree_codes='C14.280.647.500;C14.907.585.500')
+    ConceptMMI(index='1', mm='MMI', score='13.22', preferred_name='Myocardial Infarction', cui='C0027051', semtypes='[dsyn]', trigger='["-- Heart Attack"-tx-1-"heart attack"-noun-0]', location='TX', pos_info='17/12', tree_codes='C14.280.647.500;C14.907.585.500')
+    # the index here is the index of the sentence where the sentence is found
+
 
 
 More Information
