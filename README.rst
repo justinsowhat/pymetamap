@@ -7,6 +7,8 @@ then return them in the form of a list of Concept objects.
 
 This is originally written by Anthony Rios <https://github.com/AnthonyMRios/pymetamap>
 
+I added some minor features that were necessary while I was working on my thesis using this library.
+
 How to Install
 --------------
 
@@ -51,7 +53,7 @@ My Minor Modifications
 ----------------------
 As I was using this great python library, I realized that I needed a way to get the
 trigger terms as well as the indices of a trigger. So now you can get them by call these
-two methods in a Concept class ``get_pos_info()'' and ``get_trigger()'':
+two methods in a Concept class ``get_pos_info()`` and ``get_trigger()``s:
 ::
     >>> for concept in concepts:
     ...     print concept.get_trigger()
