@@ -20,6 +20,10 @@ please start the SKR/Medpost Part-of-Speech Tagger Server:
 ::
     >>> <public_mm_dir>/bin/skrmedpostctl start
 
+And then start the Word Sense Disambiguation Server:
+::
+    >>> <public_mm_dir>/bin/wsdserverctl start
+
 To start you must create a MetaMap instance from the pymetamap package.
 ::
     >>> from pymetamap import MetaMap
@@ -42,9 +46,21 @@ a list of Concept objects.
 This example shows two seperate concepts extracted via MetaMap from two
 different sentences (sentence 1 and sentence 2).
 
-TODO
-----
-Implement a function to return the source term that metamap extract a concept from.
+
+My Minor Modifications
+----------------------
+As I was using this great python library, I realized that I needed a way to get the
+trigger terms as well as the indices of a trigger. So now you can get them by call these
+two methods in a Concept class ``get_pos_info()'' and ``get_trigger()'':
+::
+    >>> for concept in concepts:
+    ...     print concept.get_trigger()
+    ...     print concept.get_pos_info()
+    Heart Attack
+    set([(0, 12])
+    heart attack
+    set([16:28])
+
 
 More Information
 ----------------
@@ -52,4 +68,5 @@ More Information
 Licensed under `Apache 2.0 <http://www.apache.org/licenses/LICENSE-2.0>`_.
 
 Written by Anthony Rios
+
 Modified by Justin So

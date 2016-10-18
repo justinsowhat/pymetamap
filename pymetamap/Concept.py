@@ -11,6 +11,8 @@
 # limitations under the License.
 
 from collections import namedtuple
+import re
+
 
 FIELD_NAMES_MMI = ('index', 'mm', 'score', 'preferred_name', 'cui', 'semtypes',
                'trigger', 'location', 'pos_info', 'tree_codes')
@@ -37,6 +39,13 @@ class ConceptMMI(namedtuple('Concept', FIELD_NAMES_MMI)):
          fields = line.split('|')
          return this_class(**dict(zip(FIELD_NAMES_MMI, fields)))
 
+    def get_trigger(self):
+        return re.search(r'\[".*?".*?"(.*?)".*?\]', self.trigger).group(1)
+
+    def get_pos_info(self):
+        return process_pos_info(self.pos_info)
+
+
 class ConceptAA(namedtuple('Concept', FIELD_NAMES_AA)):
     def __repr__(self):
         items = [(field, getattr(self, field, None)) for field in FIELD_NAMES_AA]
@@ -50,6 +59,12 @@ class ConceptAA(namedtuple('Concept', FIELD_NAMES_AA)):
     def from_mmi(this_class, line):
          fields = line.split('|')
          return this_class(**dict(zip(FIELD_NAMES_AA, fields)))
+
+    def get_trigger(self):
+        return re.search(r'\[".*?".*?"(.*?)".*?\]', self.trigger).group(1)
+
+    def get_pos_info(self):
+        return process_pos_info(self.pos_info)
 
 class ConceptUA(namedtuple('Concept', FIELD_NAMES_UA)):
     def __repr__(self):
@@ -65,12 +80,20 @@ class ConceptUA(namedtuple('Concept', FIELD_NAMES_UA)):
          fields = line.split('|')
          return this_class(**dict(zip(FIELD_NAMES_UA, fields)))
 
+    @classmethod
+    def get_trigger(self):
+        return re.search(r'\[".*?".*?"(.*?)".*?\]', self.trigger).group(1)
+
+    def get_pos_info(self):
+        return process_pos_info(self.pos_info)
+
 class Corpus(list):
     @classmethod
     def load(this_class, stream):
         stream = iter(stream)
         corpus = this_class()
         for line in stream:
+            print(line)
             fields = line.split('|')
             if fields[1] == 'MMI':
                 corpus.append(ConceptMMI.from_mmi(line))
@@ -80,3 +103,21 @@ class Corpus(list):
                 corpus.append(ConceptUA.from_mmi(line))
 
         return corpus
+
+
+def process_pos_info(pos_info):
+    pos = set()
+    if re.search(r"[,;]", pos_info):
+        pos_info = re.sub("[\[\]]", "", pos_info)
+        pos_info = re.split(r"[,;]", pos_info)
+        for info in pos_info:
+            start, length = re.split(r"[:/]", info)
+            start = int(start) - 1
+            end = start + int(length)
+            pos.add((start, end))
+    else:
+        start, length = re.split(r"[:/]", pos_info)
+        start = int(start) - 1
+        end = start + int(length)
+        pos.add((start, end))
+    return pos

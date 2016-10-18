@@ -2,3 +2,4 @@
 /dists/
 /*.egg-info
 .idea/
+./test_metamap.py
