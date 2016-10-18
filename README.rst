@@ -19,13 +19,13 @@ Example Usage
 -------------
 To use the package, you must have installed a MetaMap instance on your local environment.
 For instructions, please go to `MetaMap <https://metamap.nlm.nih.gov/>`_. When using this wrapper,
-please start the SKR/Medpost Part-of-Speech Tagger Server:
+please start the SKR/Medpost Part-of-Speech Tagger Server in the terminal:
 ::
-    >>> <public_mm_dir>/bin/skrmedpostctl start
+    # <public_mm_dir>/bin/skrmedpostctl start
 
 And then start the Word Sense Disambiguation Server:
 ::
-    >>> <public_mm_dir>/bin/wsdserverctl start
+    # <public_mm_dir>/bin/wsdserverctl start
 
 To start you must create a MetaMap instance from the pymetamap package.
 ::
@@ -60,9 +60,9 @@ two methods in a Concept class ``get_pos_info()`` and ``get_trigger()``:
     ...     print concept.get_trigger()
     ...     print concept.get_pos_info()
     Heart Attack
-    set([(0, 12])
+    set([(0, 12)])
     heart attack
-    set([16:28])
+    set([(16, 28)])
 
 
 Another modification is to automatically assign an id to each sentence. In the original implementation,
