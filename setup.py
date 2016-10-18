@@ -5,7 +5,7 @@ def readme():
         return f.read()
 
 setup(name='pymetamap',
-      version='0.11',
+      version='0.2',
       description='Python wrapper around MetaMap',
       long_description=readme(),
       url='https://github.com/justinsowhat/pymetamap',
